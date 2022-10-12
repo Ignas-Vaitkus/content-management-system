@@ -1,0 +1,22 @@
+{
+    "name": "shpunk/content-management-system",
+    "description": "This project is a simple backend website, with an Admin user and a regular user, whose privileges are limited to browsing the pages.",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Shpunk\\ContentManagementSystem\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "ignas-vaitkus",
+            "email": "ignas.vaitkus7@gmail.com"
+        }
+    ],
+    "require": {
+        "doctrine/orm": "^2.13",
+        "symfony/cache": "^6.1",
+        "doctrine/annotations": "^1.13"
+    }
+}

@@ -1,6 +1,6 @@
 <?php
 
-namespace Page;
+namespace Models;
 
 use Doctrine\ORM\Mapping as ORM;
 use LengthException;
@@ -46,7 +46,7 @@ class Page
      */
     function setTitle(string $title): self
     {
-        if ($title <= 255) {
+        if (strlen($title) <= 255) {
             $this->title = $title;
             return $this;
         } else {

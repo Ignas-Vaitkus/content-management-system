@@ -5,19 +5,27 @@ namespace Page;
 use Doctrine\ORM\Mapping as ORM;
 use LengthException;
 
-#[ORM\Entity()]
-#[ORM\Table(name: 'pages')]
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="pages")
+ */
 class Page
 {
-    #[ORM\Id]
-    #[ORM\Column(type: 'smallint')]
-    #[ORM\GeneratedValue()]
+    /** 
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue
+     */
     protected $id;
 
-    #[ORM\Column(type: 'string')]
+    /** 
+     * @ORM\Column(type="string")
+     */
     protected string $title;
 
-    #[ORM\Column(type: 'text')]
+    /** 
+     * @ORM\Column(type="text")
+     */
     protected string $content;
 
     public function getId()

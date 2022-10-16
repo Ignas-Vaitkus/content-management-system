@@ -6,8 +6,8 @@
   "autoload": {
     "psr-4": {
       "Shpunk\\ContentManagementSystem\\": "src/",
-      "Models\\": "src/models/",
       "Controllers\\": "src/controllers/",
+      "Models\\": "src/models/",
       "Views\\": "src/views/"
     }
   },

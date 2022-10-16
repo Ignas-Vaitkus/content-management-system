@@ -6,7 +6,7 @@ class Request
 {
     public function getPath()
     {
-        $path = $_SERVER['REQUST_URI'] ?? '/';
+        $path = $_SERVER['REQUEST_URI'] ?? '/';
         $position = strpos($path, '?');
 
         if ($position === false) {
@@ -17,5 +17,6 @@ class Request
     }
     public function getMethod()
     {
+        return strtolower($_SERVER['REQUEST_METHOD']);
     }
 }

@@ -6,7 +6,9 @@ use \Models\Request;
 
 class Router
 {
-    public Request $request;
+    protected Request $request;
+
+    protected string $prefix = '/content-management-system';
 
     protected array $routes = [];
     /**
@@ -19,17 +21,29 @@ class Router
     }
     public function get($path, $callback)
     {
-        $this->routes['get'][$path] = $callback;
+        $this->routes['get'][$this->prefix . $path] = $callback;
     }
 
     public function resolve()
     {
         $path = $this->request->getPath();
-        $method = $this->request->getMethod();
-        $callback = $this->routes[$method][$path];
+        $method = $this->request->getMethod() ?? 'get';
+        $callback = $this->routes[$method][$path] ?? false;
 
         echo '<pre>';
-        var_dump($callback);
+        var_dump($path);
         echo '</pre>';
+
+        echo '<pre>';
+        var_dump($this->routes);
+        echo '</pre>';
+
+
+        if ($callback === false) {
+            echo "Not found.";
+            exit;
+        }
+
+        echo call_user_func($callback);
     }
 }

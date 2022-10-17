@@ -9,6 +9,8 @@ class Request
         $path = $_SERVER['REQUEST_URI'] ?? '/';
         $position = strpos($path, '?');
 
+        $path = strtolower($path);
+
         if ($position === false) {
             return $path;
         }

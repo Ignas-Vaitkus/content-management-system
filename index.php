@@ -2,7 +2,7 @@
 
 use Controllers\Application;
 
-require_once('bootstrap.php');
+require('vendor/autoload.php');
 
 $app = new Application();
 

@@ -2,16 +2,13 @@
 
 use Controllers\Application;
 
-require('vendor/autoload.php');
+require('bootstrap.php');
 
-$app = new Application();
+$app = new Application($entityManager);
 
-$app->router->get('/', function () {
-    return 'Hello World';
-});
+$app->router->get('/', 'BasicUser');
 
-$app->router->get('/contact', function () {
-    return 'Contact';
-});
+$app->router->get('/admin', 'adminNav');
+$app->router->get('/admin/view', 'adminNav');
 
 $app->run();

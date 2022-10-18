@@ -8,7 +8,7 @@ $app = new Application($entityManager);
 
 $app->router->get('/', 'BasicUser');
 
-$app->router->get('/admin', 'adminNav');
-$app->router->get('/admin/view', 'adminNav');
+$app->router->get('/admin', 'AdminNav');
+$app->router->get('/admin/view', 'AdminNav');
 
 $app->run();

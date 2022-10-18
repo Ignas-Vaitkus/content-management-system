@@ -9,8 +9,7 @@ require_once "vendor/autoload.php";
 $isDevMode = true;
 $proxyDir = null;
 $cache = null;
-$useSimpleAnnotationReader = false;
-$config = ORMSetup::createAnnotationMetadataConfiguration(array(__DIR__ . "/src"), $isDevMode, $proxyDir, $cache, $useSimpleAnnotationReader);
+$config = ORMSetup::createAnnotationMetadataConfiguration(array(__DIR__ . "/src"), $isDevMode, $proxyDir, $cache);
 
 // database configuration parameters
 $conn = array(

@@ -4,7 +4,7 @@ use Controllers\Application;
 
 require('bootstrap.php');
 
-$app = new Application($entityManager, __DIR__);
+$app = Application::getApp($entityManager, __DIR__);
 
 $app->router->get('/', 'BasicUserNav');
 

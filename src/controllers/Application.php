@@ -14,8 +14,8 @@ class Application
     public Router $router;
     public Request $request;
     public Response $response;
-    public static Application $app;
-    public function __construct(EntityManager $entityManager, string $rootDir)
+    private static $app = null;
+    private function __construct(EntityManager $entityManager, string $rootDir)
     {
         self::$rootDir = $rootDir;
         self::$entityManager = $entityManager;
@@ -24,6 +24,15 @@ class Application
         $this->response = new Response();
         $this->request = new Request();
         $this->router = new Router($this->request, $this->response);
+    }
+
+    public static function getApp(EntityManager $entityManager = null, string $rootDir = null): Application
+    {
+        if (self::$app == null) {
+            self::$app = new Application($entityManager, $rootDir);
+        }
+
+        return self::$app;
     }
 
     public function run()

@@ -34,7 +34,7 @@ class Router
         $callback = $this->routes[$method][$path] ?? false;
 
         if ($callback === false) {
-            Application::$app->response->setStatusCode(404);
+            Application::getApp()->response->setStatusCode(404);
             return $this->renderContent('Not Found.');
         }
 
@@ -57,15 +57,20 @@ class Router
         return str_replace('{{Content}}', $viewContent, $layoutContent);
     }
 
-    protected function layoutContent()
+    protected function layoutContent($layout = 'Main')
     {
         ob_start();
-        include_once Application::$rootDir . "/src/views/layouts/Main.php";
+        include_once Application::$rootDir . "/src/views/layouts/$layout.php";
         return ob_get_clean();
     }
 
-    protected function renderOnlyView($view)
+    protected function renderOnlyView($view, $params = [])
     {
+        //Will include params inside the view
+        foreach ($params as $key => $value) {
+            $$key = $value;
+        }
+
         ob_start();
         include_once Application::$rootDir . "/src/views/layouts/$view.php";
         return ob_get_clean();

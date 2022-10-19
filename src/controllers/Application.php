@@ -14,6 +14,7 @@ class Application
     public Router $router;
     public Request $request;
     public Response $response;
+    public array $pages;
     private static $app = null;
     private function __construct(EntityManager $entityManager, string $rootDir)
     {
@@ -24,6 +25,8 @@ class Application
         $this->response = new Response();
         $this->request = new Request();
         $this->router = new Router($this->request, $this->response);
+
+        $this->pages = $entityManager->getRepository('Models\Page')->findAll();
     }
 
     public static function getApp(EntityManager $entityManager = null, string $rootDir = null): Application

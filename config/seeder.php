@@ -2,7 +2,7 @@
 
 use Models\Page;
 
-require_once('../bootstrap.php');
+require_once('bootstrap.php');
 
 $titles = ['Home', 'About', 'Services', 'News', 'Contact'];
 $content = [

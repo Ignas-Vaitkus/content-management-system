@@ -3,10 +3,12 @@
 namespace Controllers;
 
 use \Models\Request;
+use Models\Response;
 
 class Router
 {
     protected Request $request;
+    protected Response $response;
 
     protected string $prefix = '/content-management-system';
 
@@ -15,9 +17,10 @@ class Router
      * @param $request Models\Request 
      * @param $routes array 
      */
-    function __construct(Request $request)
+    function __construct(Request $request, Response $response)
     {
         $this->request = $request;
+        $this->response = $response;
     }
     public function get($path, $callback)
     {
@@ -27,11 +30,12 @@ class Router
     public function resolve()
     {
         $path = $this->request->getPath();
-        $method = $this->request->getMethod() ?? 'get';
+        $method = $this->request->getMethod();
         $callback = $this->routes[$method][$path] ?? false;
 
         if ($callback === false) {
-            return "Not found.";
+            Application::$app->response->setStatusCode(404);
+            return $this->renderContent('Not Found.');
         }
 
         if (is_string($callback)) {
@@ -46,7 +50,11 @@ class Router
         $layoutContent = $this->layoutContent();
         $viewContent = $this->renderOnlyView($view);
         return str_replace('{{Content}}', $viewContent, $layoutContent);
-        // include_once  Application::$rootDir . "src/views/layouts/$view.php";
+    }
+    public function renderContent($viewContent)
+    {
+        $layoutContent = $this->layoutContent();
+        return str_replace('{{Content}}', $viewContent, $layoutContent);
     }
 
     protected function layoutContent()

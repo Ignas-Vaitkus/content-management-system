@@ -40,21 +40,31 @@ class Router
         $callback = $this->routes[$method][$path] ?? false;
 
         if (!$callback) {
+            Application::getApp()->response->setStatusCode(404);
 
             for ($i = strlen($path) - 1; $i > 0; $i--) {
                 if ($path[$i] == '/') {
 
                     //Take the last valid path
 
-                    $previousPath = substr($path, 0, $i);
-                    $callback = $this->routes[$method][$previousPath];
+                    $previousPath = substr($path, 0, $i + 1);
+
+
+                    //If 
+                    if ($this->prefix . '/' == $previousPath) {
+                        $callback = $this->routes[$method][$previousPath];
+                    } else {
+                        $callback = $this->routes[$method][substr($previousPath, 0, -1)];
+                    }
+
+
                     unset($callback[sizeof($callback) - 1]);
 
                     break;
                 }
             }
 
-            Application::getApp()->response->setStatusCode(404);
+
             return $this->renderView($callback, '404 Not Found.');
         }
 

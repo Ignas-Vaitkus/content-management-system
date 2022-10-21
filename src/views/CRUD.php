@@ -45,5 +45,5 @@ use Controllers\Application;
         </tbody>
     </table>
 
-    <div class="mt-5"><a href="/content-management-system/Admin/add"><button type="button" class="btn btn-secondary">Add page</button></a></div>
+    <div class="mt-5"><a href="/content-management-system/Admin/add"><button type="button" class="btn btn-success">Add page</button></a></div>
 </div>

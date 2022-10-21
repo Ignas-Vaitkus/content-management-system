@@ -28,9 +28,9 @@ class Router
         $this->routes['get'][$this->prefix . $path] = $callback;
     }
 
-    public function post(string $url, $callback)
+    public function post(string $path, $callback)
     {
-        $this->routes['post'][$url] = $callback;
+        $this->routes['post'][$path] = $callback;
     }
 
     public function resolve()
@@ -49,8 +49,7 @@ class Router
 
                     $previousPath = substr($path, 0, $i + 1);
 
-
-                    //If 
+                    //If the path previous path matches the last valid path
                     if ($this->prefix . '/' == $previousPath) {
                         $callback = $this->routes[$method][$previousPath];
                     } else {

@@ -19,9 +19,6 @@ use Controllers\Application;
                 <td><?php echo Application::$pages[0]->getTitle(); ?></td>
                 <td>
                     <a class="text-decoration-none" href="/content-management-system/Admin/edit/1"><button type="button" class="btn btn-primary btn-sm">Edit</button></a>
-                    <form action="/content-management-system/Admin/delete/1" class="d-inline-flex" method="POST">
-                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                    </form>
                 </td>
             </tr>
 

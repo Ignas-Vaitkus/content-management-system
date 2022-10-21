@@ -1,4 +1,4 @@
-# content-management-system
+# Content Management System
 
 This project is a simple backend website that has a custom MVC framework built with [Doctrine ORM](https://github.com/doctrine/orm/) to manage models. The website has an Admin user and a regular user, whose privileges are limited to browsing the pages.
 

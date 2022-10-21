@@ -16,7 +16,7 @@ $pages = Application::$pages;
 foreach ($pages as $page) {
     $app->router->get('/' . $page->getTitle(), ['layouts/Main', 'BasicNav']);
     $app->router->get('/Admin/view/' . $page->getTitle(), ['layouts/Main', 'layouts/AdminNav', 'BasicNav']);
-    $app->router->get('/Admin/edit/' . $page->getId(), ['layouts/Main', 'Update']);
+    $app->router->get('/Admin/edit/' . $page->getId(), ['layouts/Main', 'layouts/AdminNav', 'Update']);
 }
 
 foreach (array_slice($pages, 1) as $page) {

@@ -9,14 +9,14 @@ $app = Application::getApp($entityManager, __DIR__, '/Admin');
 $app->router->get('/', ['layouts/Main', 'BasicNav']);
 $app->router->get('/Admin', ['layouts/Main', 'layouts/AdminNav', 'CRUD']);
 $app->router->get('/Admin/view', ['layouts/Main', 'layouts/AdminNav', 'BasicNav']);
-$app->router->get('/Admin/add', ['layouts/Main', 'layouts/AdminNav', 'Create']);
+$app->router->get('/Admin/add', ['layouts/Main', 'layouts/AdminNav', 'AddUpdate']);
 
 $pages = Application::$pages;
 
 foreach ($pages as $page) {
     $app->router->get('/' . $page->getTitle(), ['layouts/Main', 'BasicNav']);
     $app->router->get('/Admin/view/' . $page->getTitle(), ['layouts/Main', 'layouts/AdminNav', 'BasicNav']);
-    $app->router->get('/Admin/edit/' . $page->getId(), ['layouts/Main', 'layouts/AdminNav', 'Update']);
+    $app->router->get('/Admin/edit/' . $page->getId(), ['layouts/Main', 'layouts/AdminNav', 'AddUpdate']);
 }
 
 foreach (array_slice($pages, 1) as $page) {

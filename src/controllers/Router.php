@@ -30,7 +30,7 @@ class Router
 
     public function post(string $path, $callback)
     {
-        $this->routes['post'][$path] = $callback;
+        $this->routes['post'][$this->prefix . $path] = $callback;
     }
 
     public function resolve()

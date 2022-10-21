@@ -46,7 +46,6 @@ class Router
                 if ($path[$i] == '/') {
 
                     //Take the last valid path
-
                     $previousPath = substr($path, 0, $i + 1);
 
                     //If the path previous path matches the last valid path set the callback to that
@@ -66,7 +65,6 @@ class Router
                     break;
                 }
             }
-
 
             return $this->renderView($callback, '404 Not Found.');
         }

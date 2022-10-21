@@ -30,7 +30,6 @@ php config/seeder.php
 ### Usage notes
 
 - The routes are case sensitive.
-- The router does not resolve the invalid paths of invalid subpaths and will return a compiler error.
 
 ## Study notes
 

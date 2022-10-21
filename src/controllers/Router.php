@@ -49,14 +49,18 @@ class Router
 
                     $previousPath = substr($path, 0, $i + 1);
 
-                    //If the path previous path matches the last valid path
+                    //If the path previous path matches the last valid path set the callback to that
                     if ($this->prefix . '/' == $previousPath) {
                         $callback = $this->routes[$method][$previousPath];
                     } else {
+                        //If the path previous path matches the last valid path set the callback to that
+                        if (!isset($this->routes[$method][substr($previousPath, 0, -1)])) {
+                            continue;
+                        }
                         $callback = $this->routes[$method][substr($previousPath, 0, -1)];
                     }
 
-
+                    //Shorten the view array by one to output the message
                     unset($callback[sizeof($callback) - 1]);
 
                     break;

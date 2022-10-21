@@ -36,4 +36,4 @@ php config/seeder.php
 - Implemented Singleton design pattern. Note: This pattern was only used in one place to save time.
 - Implemented recursive view generation.
 - The tracking of different routes is desired to be further improved.
-- For edit and add paths all page entities do not have to be retrieved.
+- All page entities do not have to be retrieved for edit and add routes.

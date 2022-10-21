@@ -12,12 +12,12 @@ This project is a simple backend website that has a custom MVC framework built w
 
 - Clone the repository to your xampp localhost directory.
 - Run `config/mysql_database_init.sql` script on MySql Workbench to initialize the database. NOTE: There there are two DROP commands in the script! Check to see if it will not affect your existing databases or users.
-- Then run the following commands:
+- Then run the following commands in project root directory:
 
 ```
 composer install
 composer dump-autoload
-php update-schema.php
+php config/update-schema.php
 php config/seeder.php
 ```
 

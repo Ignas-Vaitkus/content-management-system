@@ -21,7 +21,7 @@ php config/update-schema.php
 php config/seeder.php
 ```
 
-### How to Start
+## How to Start
 
 - Turn on your local Apache Web Server and MySQL Database.
 - Open the path of the app, e.g: http://localhost/content-management-system.
@@ -31,8 +31,9 @@ php config/seeder.php
 
 - The routes are case sensitive.
 
-## Study notes
+### Study notes
 
 - Implemented Singleton design pattern. Note: This pattern was only used in one place to save time.
 - Implemented recursive view generation.
 - The tracking of different routes is desired to be further improved.
+- For edit and add paths all page entities do not have to be retrieved.

@@ -9,10 +9,33 @@ $app = Application::getApp($entityManager, __DIR__, '/Admin');
 
 $app->router->get('/', ['layouts/Main', 'BasicNav']);
 $app->router->get('/Admin', ['layouts/Main', 'layouts/AdminNav', 'CRUD']);
+$app->router->get('/Login', ['layouts/Main', 'Login']);
+$app->router->post('/Login', function () use ($app) {
+    //Login values are hardcoded for now
+    if (
+        isset($_POST['username'])
+        && isset($_POST['password'])
+        && $_POST['username'] == 'Admin'
+        && $_POST['password'] == 'Password'
+    ) {
+        //Set session for an hour
+        // var_dump(session_save_path());
+        session_start([
+            'cookie_lifetime' => 3600 * 24
+        ]);
+        // session_create_id('1');
+        $_SESSION['admin'] = 'admin';
+        header("Location: /content-management-system/Admin");
+    } else {
+        return $app->router->renderView(['layouts/Main', 'Login'], 'Invalid username or password');
+    }
+});
+
 $app->router->get('/Admin/view', ['layouts/Main', 'layouts/AdminNav', 'BasicNav']);
 $app->router->get('/Admin/add', ['layouts/Main', 'layouts/AdminNav', 'AddUpdate']);
 $app->router->post('/Admin/add', function () use ($app) {
 
+    //Move the validation to a function to not repeat the code
     if (
         isset($_POST['Title'])
         && isset($_POST['Content'])

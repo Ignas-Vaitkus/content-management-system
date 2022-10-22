@@ -69,6 +69,11 @@ class Router
             return $this->renderView($callback, '404 Not Found.');
         }
 
+        //Temporary rerouting solution to login if admin is not logged in
+        if (str_contains($path, 'Admin') && !isset($_SESSION['admin'])) {
+            return header("Location: /content-management-system/Login");
+        }
+
         if (is_array($callback)) {
             return $this->renderView($callback);
         }

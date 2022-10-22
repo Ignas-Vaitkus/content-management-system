@@ -25,7 +25,7 @@ php config/seeder.php
 
 - Turn on your local Apache Web Server and MySQL Database.
 - Open the path of the app, e.g: http://localhost/content-management-system.
-- To open admin mode add `/Admin` to the url. e.g: http://localhost/content-management-system/Admin
+- To open admin mode add `/Admin` to the url. e.g: http://localhost/content-management-system/Admin. Username: Admin, password: Password.
 
 ### Usage notes
 
@@ -37,3 +37,4 @@ php config/seeder.php
 - Implemented recursive view generation.
 - The tracking of different routes is desired to be further improved.
 - All page entities do not have to be retrieved for edit and add routes.
+- Controllers were not really used in this project. This should be implemented in the future.

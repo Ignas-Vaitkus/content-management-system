@@ -29,7 +29,7 @@
                 foreach (array_slice($pages, 1) as $page) :
 
                     if (isset($_SERVER['PATH_INFO']) && $_SERVER['PATH_INFO'] != '/Admin/view') {
-                        $keyword = substr($_SERVER['PATH_INFO'], -strlen($page->getTitle()));
+                        $keyword = str_replace('+', ' ', substr($_SERVER['PATH_INFO'], -strlen($page->getTitle())));
                     } else {
                         $keyword = $pages[0]->getTitle();
                         $currentPage = $pages[0];
@@ -54,7 +54,7 @@
                                                                                         $prefix = '';
                                                                                     }
 
-                                                                                    echo $prefix . $page->getTitle();
+                                                                                    echo $prefix . str_replace(' ', '+', $page->getTitle());
 
                                                                                     ?>">
                             <?php

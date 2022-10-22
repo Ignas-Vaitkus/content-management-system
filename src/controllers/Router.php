@@ -25,11 +25,14 @@ class Router
     }
     public function get($path, $callback)
     {
+
+        $path = str_replace(' ', '+', $path);
         $this->routes['get'][$this->prefix . $path] = $callback;
     }
 
     public function post(string $path, $callback)
     {
+        $path = str_replace(' ', '+', $path);
         $this->routes['post'][$this->prefix . $path] = $callback;
     }
 

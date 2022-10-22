@@ -21,7 +21,7 @@
                                         ?>" href="/content-management-system/Admin/view">View Websites</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/content-management-system/Admin/logout">Log Out</a>
+                    <a class="nav-link" href="/content-management-system/logout">Log Out</a>
                 </li>
             </ul>
         </div>

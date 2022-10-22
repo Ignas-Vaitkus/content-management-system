@@ -70,7 +70,7 @@ class Router
         }
 
         //Temporary rerouting solution to login if admin is not logged in
-        if (str_contains($path, 'Admin') && !isset($_SESSION['admin'])) {
+        if (str_contains($path, 'Admin') && !isset($_SESSION['role'])) {
             return header("Location: /content-management-system/Login");
         }
 

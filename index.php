@@ -30,6 +30,11 @@ $app->router->post('/Login', function () use ($app) {
     }
 });
 
+$app->router->get('/logout', function () {
+    session_destroy();
+    header("Location: /content-management-system/");
+});
+
 $app->router->get('/Admin/view', ['layouts/Main', 'layouts/AdminNav', 'BasicNav']);
 $app->router->get('/Admin/add', ['layouts/Main', 'layouts/AdminNav', 'AddUpdate']);
 $app->router->post('/Admin/add', function () use ($app) {

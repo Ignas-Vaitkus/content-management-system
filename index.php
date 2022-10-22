@@ -7,6 +7,11 @@ require('bootstrap.php');
 
 $app = Application::getApp($entityManager, __DIR__, '/Admin');
 
+//Set session for a day
+session_start([
+    'cookie_lifetime' => 3600 * 24
+]);
+
 $app->router->get('/', ['layouts/Main', 'BasicNav']);
 $app->router->get('/Admin', ['layouts/Main', 'layouts/AdminNav', 'CRUD']);
 $app->router->get('/Login', ['layouts/Main', 'Login']);
@@ -18,13 +23,7 @@ $app->router->post('/Login', function () use ($app) {
         && $_POST['username'] == 'Admin'
         && $_POST['password'] == 'Password'
     ) {
-        //Set session for an hour
-        // var_dump(session_save_path());
-        session_start([
-            'cookie_lifetime' => 3600 * 24
-        ]);
-        // session_create_id('1');
-        $_SESSION['admin'] = 'admin';
+        $_SESSION['role'] = 'admin';
         header("Location: /content-management-system/Admin");
     } else {
         return $app->router->renderView(['layouts/Main', 'Login'], 'Invalid username or password');

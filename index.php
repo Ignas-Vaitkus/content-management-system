@@ -39,25 +39,30 @@ $app->router->get('/Admin/view', ['layouts/Main', 'layouts/AdminNav', 'BasicNav'
 $app->router->get('/Admin/add', ['layouts/Main', 'layouts/AdminNav', 'AddUpdate']);
 $app->router->post('/Admin/add', function () use ($app) {
 
-    //Move the validation to a function to not repeat the code
-    if (
-        isset($_POST['Title'])
-        && isset($_POST['Content'])
-        && strlen($_POST['Title']) <= 255
-        && strlen($_POST['Title']) >= 0
-        && strlen($_POST['Content']) >= 0
-    ) {
+    if (isset($_SESSION['role'])) {
+        //Move the validation to a function to not repeat the code
+        if (
+            isset($_POST['Title'])
+            && isset($_POST['Content'])
+            && strlen($_POST['Title']) <= 255
+            && strlen($_POST['Title']) >= 0
+            && strlen($_POST['Content']) >= 0
+        ) {
 
-        $page = new Page();
-        $page->setTitle($_POST['Title']);
-        $page->setContent($_POST['Content']);
+            $page = new Page();
+            $page->setTitle($_POST['Title']);
+            $page->setContent($_POST['Content']);
 
-        Application::$entityManager->persist($page);
-        Application::$entityManager->flush();
-        header("Location: /content-management-system/Admin");
+            Application::$entityManager->persist($page);
+            Application::$entityManager->flush();
+            header("Location: /content-management-system/Admin");
+        } else {
+            //Provide more indication to user if data is invalid
+            $app->response->setStatusCode(400);
+        }
     } else {
-        //Provide more indication to user if data is invalid
-        $app->response->setStatusCode(400);
+        //Unouthorized status code
+        $app->response->setStatusCode(401);
     }
 });
 
@@ -69,34 +74,45 @@ foreach ($pages as $page) {
     $app->router->get('/Admin/edit/' . $page->getId(), ['layouts/Main', 'layouts/AdminNav', 'AddUpdate']);
     $app->router->post('/Admin/edit/' . $page->getId(), function () use ($page, $app) {
 
-        //Move the validation to a function to not repeat the code
-        if (
-            isset($_POST['Title'])
-            && isset($_POST['Content'])
-            && strlen($_POST['Title']) <= 255
-            && strlen($_POST['Title']) >= 0
-            && strlen($_POST['Content']) >= 0
-        ) {
-            $page->setTitle($_POST['Title']);
-            $page->setContent($_POST['Content']);
+        //If an admin is logged in
+        if (isset($_SESSION['role'])) {
+            //Move the validation to a function to not repeat the code
+            if (
+                isset($_POST['Title'])
+                && isset($_POST['Content'])
+                && strlen($_POST['Title']) <= 255
+                && strlen($_POST['Title']) >= 0
+                && strlen($_POST['Content']) >= 0
+            ) {
+                $page->setTitle($_POST['Title']);
+                $page->setContent($_POST['Content']);
 
-            Application::$entityManager->persist($page);
-            Application::$entityManager->flush();
-            header("Location: /content-management-system/Admin");
+                Application::$entityManager->persist($page);
+                Application::$entityManager->flush();
+                header("Location: /content-management-system/Admin");
+            } else {
+                //Provide more indication to user that data is invalid (future work)
+                $app->response->setStatusCode(400);
+            }
         } else {
-            //Provide more indication to user that data is invalid
-            $app->response->setStatusCode(400);
+            //Unouthorized status code
+            $app->response->setStatusCode(401);
         }
     });
 }
 
 foreach (array_slice($pages, 1) as $page) {
-    $app->router->post('/Admin/delete/' . $page->getId(), function () use ($page) {
+    $app->router->post('/Admin/delete/' . $page->getId(), function () use ($page, $app) {
+        //If an admin is logged in
         //Delete page and redirect
-
-        Application::$entityManager->remove($page);
-        Application::$entityManager->flush();
-        header("Location: /content-management-system/Admin");
+        if (isset($_SESSION['role'])) {
+            Application::$entityManager->remove($page);
+            Application::$entityManager->flush();
+            header("Location: /content-management-system/Admin");
+        } else {
+            //Unouthorized status code
+            $app->response->setStatusCode(401);
+        }
     });
 }
 

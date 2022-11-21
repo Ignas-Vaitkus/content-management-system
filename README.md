@@ -1,6 +1,6 @@
 # Content Management System
 
-This project is a simple backend website that has a custom MVC framework built with [Doctrine ORM](https://github.com/doctrine/orm/) to manage models. The website has an Admin user, who can edit, delete and add pages for the regular user to see, whereas the regular user, whose can only browse the pages.
+This project is a simple backend website that has a custom MVC framework built with [Doctrine ORM](https://github.com/doctrine/orm/) to manage models. The website has an Admin user, who can edit, delete and add pages for the regular user to see, whereas the regular user, can only browse the pages.
 
 ## Requirements
 
